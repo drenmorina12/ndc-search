@@ -1,4 +1,4 @@
-<div class="w-full max-w-4xl mx-auto space-y-8">
+<div class="w-full max-w-4xl mx-auto space-y-6 relative">
     <!-- Search Form -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <form wire:submit.prevent="search" class="flex flex-col sm:flex-row gap-4">
@@ -17,14 +17,12 @@
         </form>
     </div>
 
-    <div class="h-12 flex items-center justify-center">
-        <div wire:loading wire:target="search" class="flex items-center gap-3 text-blue-600 text-sm font-medium bg-white px-4 py-2 rounded-md shadow-sm border border-blue-200">
-            <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
-            </svg>
-            Duke kërkuar...
-        </div>
+    <div wire:loading wire:target="search" class="absolute left-1/2 transform -translate-x-1/2 z-20 flex items-center justify-center gap-3 text-gray-900 text-sm font-medium bg-white px-4 py-2 rounded-md shadow-lg border border-blue-200" style="top: 85px;">
+        <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+        </svg>
+        Duke kërkuar...
     </div>
 
     <!-- Results Table -->
