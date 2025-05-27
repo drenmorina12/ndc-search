@@ -7,13 +7,13 @@
 
     @foreach ($results as $result)
         <div class="p-4 border rounded">
-            <strong>NDC:</strong> {{ $result['ndc']['ndc_code'] ?? $result['ndc_code'] }} <br>
+            <strong>NDC:</strong> {{ $result['drug']['ndc_code'] ?? $result['ndc_code'] }} <br>
             <strong>Source:</strong> {{ $result['source'] }}
 
-            @isset($result['ndc'])
-                <div>Brand: {{ $result['ndc']['brand_name'] }}</div>
-                <div>Generic: {{ $result['ndc']['generic_name'] }}</div>
-                <div>Labeler: {{ $result['ndc']['labeler_name'] }}</div>
+            @isset($result['drug'])
+                <div>Brand: {{ $result['drug']['brand_name'] }}</div>
+                <div>Generic: {{ $result['drug']['generic_name'] }}</div>
+                <div>Labeler: {{ $result['drug']['labeler_name'] }}</div>
             @endisset
         </div>
     @endforeach

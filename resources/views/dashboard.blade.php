@@ -37,7 +37,7 @@
             </button>
         </form> --}}
 
-        <livewire:search-ndc /> 
+        <livewire:search-drug /> 
 
         {{-- RESULTS TABLE --}}
         @if (!empty($results))

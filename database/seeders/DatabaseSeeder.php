@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call([
-            NdcSeeder::class,
+            DrugSeeder::class,
         ]);
         // User::factory(10)->create();
 

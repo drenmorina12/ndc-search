@@ -3,9 +3,9 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Ndc;
+use App\Models\Drug;
 
-class SearchNdc extends Component
+class SearchDrug extends Component
 {
 
     public string $ndcInput = '';
@@ -20,12 +20,12 @@ class SearchNdc extends Component
             return;
         }
 
-        $ndc = Ndc::where('ndc_code', $input)->first();
+        $drug = Drug::where('ndc_code', $input)->first();
 
-        if ($ndc) {
+        if ($drug) {
             $this->results[] = [
                 'source' => 'Local',
-                'ndc' => $ndc
+                'drug' => $drug
             ];
         } else {
             $this->results[] = [
@@ -38,6 +38,6 @@ class SearchNdc extends Component
 
     public function render()
     {
-        return view('livewire.search-ndc');
+        return view('livewire.search-drug');
     }
 }

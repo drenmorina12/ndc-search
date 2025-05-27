@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Ndc;
+use App\Models\Drug;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class NdcSeeder extends Seeder
+class DrugSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Ndc::factory(10)->create();
+        Drug::factory(10)->create();
     }
 }
