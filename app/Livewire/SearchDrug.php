@@ -74,17 +74,17 @@ class SearchDrug extends Component
             $foundFromApi = collect($apiResults)->pluck('product_ndc')->all();
 
             foreach ($apiResults as $item) {
-
+                $drug = Drug::create([
+                    'ndc_code'     => $item['product_ndc'],
+                    'brand_name'   => $item['brand_name'] ?? 'Unknown',
+                    'generic_name' => $item['generic_name'] ?? 'Unknown',
+                    'labeler_name' => $item['labeler_name'] ?? 'Unknown',
+                    'product_type' => $item['product_type'] ?? 'Unknown',
+                ]);
 
                 $final[] = [
                     'source' => 'OpenFDA',
-                    'drug' => [
-                        'ndc_code'     => $item['product_ndc'],
-                        'brand_name'   => $item['brand_name'] ?? 'Unknown',
-                        'generic_name' => $item['generic_name'] ?? 'Unknown',
-                        'labeler_name' => $item['labeler_name'] ?? 'Unknown',
-                        'product_type' => $item['product_type'] ?? 'Unknown',
-                    ],
+                    'drug' => $drug,
                 ];
             }
 
