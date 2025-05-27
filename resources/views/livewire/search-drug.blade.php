@@ -1,6 +1,6 @@
-<div class="space-y-6 w-[66%] mx-auto">
+<div class="space-y-6 mx-auto" style="width: 900px;">
     <!-- Search Form -->
-    <form wire:submit.prevent="search" class="flex flex-row items-center gap-3 mb-6">
+    <form wire:submit.prevent="search" class="flex flex-row items-center gap-3 mb-6 " style="width: 900px;">
         <input 
             type="text" 
             wire:model.defer="ndcInput" 
@@ -17,8 +17,8 @@
 
     <!-- Results Table -->
     @if (!empty($results))
-        <div class="overflow-x-auto">
-            <table class="table-auto border border-gray-200 text-sm text-left">
+        <div class="overflow-x-auto" style="width: 900px;">
+            <table class="table-auto border border-gray-200 text-sm text-left w-full">
                 <thead class="bg-gray-100">
                     <tr>
                         <th class="px-4 py-2 border font-medium text-gray-700">Kodi</th>
