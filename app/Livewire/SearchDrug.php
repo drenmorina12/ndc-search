@@ -15,22 +15,34 @@ class SearchDrug extends Component
     {
         $this->reset('results');
 
-        $input = trim($this->ndcInput);
-        if (!$input) {
+        $ndcCodes = collect(explode(',', $this->ndcInput))
+            ->map(fn($code) => trim($code))
+            ->filter()
+            ->unique()
+            ->values();
+
+        if ($ndcCodes->isEmpty()) {
             return;
         }
 
-        $drug = Drug::where('ndc_code', $input)->first();
+        // Step 1: Check local DB
+        $localDrugs = Drug::whereIn('ndc_code', $ndcCodes)->get();
+        $foundLocal = $localDrugs->pluck('ndc_code');
 
-        if ($drug) {
+        foreach ($localDrugs as $drug) {
             $this->results[] = [
                 'source' => 'Local',
-                'drug' => $drug
+                'drug' => $drug,
             ];
-        } else {
+        }
+
+        // Step 2: Mark those not found
+        $notFound = $ndcCodes->diff($foundLocal);
+
+        foreach ($notFound as $code) {
             $this->results[] = [
                 'source' => 'Not Found',
-                'ndc_code' => $input
+                'ndc_code' => $code,
             ];
         }
     }
