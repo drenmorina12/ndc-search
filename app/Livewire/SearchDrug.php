@@ -13,40 +13,52 @@ class SearchDrug extends Component
 
     public function search()
     {
-        $this->reset('results');
+        $ndcCodes = $this->parseNdcInput($this->ndcInput);
 
-        $ndcCodes = collect(explode(',', $this->ndcInput))
-            ->map(fn($code) => trim($code))
-            ->filter()
-            ->unique()
-            ->values();
+        $this->results = [];
 
-        if ($ndcCodes->isEmpty()) {
-            return;
-        }
+        $localResults = $this->searchLocal($ndcCodes);
+        $this->results = array_merge($this->results, $localResults);
 
-        // Step 1: Check local DB
-        $localDrugs = Drug::whereIn('ndc_code', $ndcCodes)->get();
-        $foundLocal = $localDrugs->pluck('ndc_code');
+        $notFoundCodes = $this->findUnmatched($ndcCodes, $localResults);
 
-        foreach ($localDrugs as $drug) {
-            $this->results[] = [
-                'source' => 'Local',
-                'drug' => $drug,
-            ];
-        }
-
-        // Step 2: Mark those not found
-        $notFound = $ndcCodes->diff($foundLocal);
-
-        foreach ($notFound as $code) {
-            $this->results[] = [
-                'source' => 'Not Found',
-                'ndc_code' => $code,
-            ];
+        if (!empty($notFoundCodes)) {
+            foreach ($notFoundCodes as $code) {
+                $this->results[] = [
+                    'source' => 'Not Found',
+                    'ndc_code' => $code,
+                ];
+            }
         }
     }
 
+    protected function parseNdcInput(string $input): array
+    {
+        return collect(explode(',', $input))
+            ->map(fn($code) => trim($code))
+            ->filter()
+            ->unique()
+            ->values()
+            ->all();
+    }
+
+    protected function searchLocal(array $ndcCodes): array
+    {
+        $drugs = Drug::whereIn('ndc_code', $ndcCodes)->get();
+
+        return $drugs->map(function ($drug) {
+            return [
+                'source' => 'Local',
+                'drug' => $drug,
+            ];
+        })->all();
+    }
+
+    protected function findUnmatched(array $ndcCodes, array $localResults): array
+    {
+        $found = collect($localResults)->pluck('ndc.ndc_code')->all();
+        return array_values(array_diff($ndcCodes, $found));
+    }
 
     public function render()
     {
