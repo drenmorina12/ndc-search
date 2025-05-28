@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Drug;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 
 class SearchDrug extends Component
 {
@@ -13,6 +14,10 @@ class SearchDrug extends Component
 
     public function search()
     {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
         $ndcCodes = $this->parseNdcInput($this->ndcInput);
 
         $this->results = [];
@@ -90,7 +95,7 @@ class SearchDrug extends Component
 
             $notFound = array_diff($ndcCodes, $foundFromApi);
         } else {
-            $notFound = $ndcCodes; 
+            $notFound = $ndcCodes;
         }
 
         foreach ($notFound as $code) {
