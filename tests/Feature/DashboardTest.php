@@ -2,15 +2,15 @@
 
 use App\Models\User;
 
-test('guests are redirected to the login page', function () {
-    $response = $this->get('/home');
-    $response->assertRedirect('/login');
+test('guests can view the home page', function () {
+    $response = $this->get('/');
+    $response->assertStatus(200);
 });
 
 test('authenticated users can visit the home', function () {
     $user = User::factory()->create();
     $this->actingAs($user);
 
-    $response = $this->get('/home');
+    $response = $this->get('/');
     $response->assertStatus(200);
 });
