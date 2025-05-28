@@ -74,5 +74,6 @@ new class extends Component {
                 </x-action-message>
             </div>
         </form>
+
     </x-settings.layout>
 </section>
