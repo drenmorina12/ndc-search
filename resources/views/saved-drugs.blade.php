@@ -18,13 +18,13 @@
         @livewireStyles
     </head>
 
-    <body class="flex flex-col min-h-screen bg-gray-50 text-black font-sans">
+    <body class="flex flex-col min-h-screen bg-gray-50 dark:bg-zinc-800 text-black dark:text-white font-sans">
 
         {{-- HEADER --}}
-        <header class="flex justify-between items-center px-6 py-4 bg-white border-b border-gray-200">
-            <div class="text-xl font-bold text-gray-900">TENTON</div>
+        <header class="flex justify-between items-center px-6 py-4 bg-white dark:bg-zinc-900 border-b border-gray-200 dark:border-zinc-700">
+            <div class="text-xl font-bold text-gray-900 dark:text-white">TENTON</div>
             <div class="flex gap-3">
-                <a href="{{ route('dashboard') }}" class="text-sm text-gray-600 hover:text-gray-800 px-4 py-2">Kthehu</a>
+                <a href="{{ route('dashboard') }}" class="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white px-4 py-2">Kthehu</a>
                 {{-- PROFILE DROPDOWN --}}
                 <flux:dropdown position="bottom" align="start">
                     <flux:profile :name="auth() -> user() -> name" :initials="auth() -> user() -> initials()"
@@ -80,7 +80,7 @@
 
         {{-- FOOTER --}}
         <footer
-            class="flex flex-col sm:flex-row justify-center items-center gap-8 text-sm text-gray-600 p-6 bg-white border-t border-gray-200">
+            class="flex flex-col sm:flex-row justify-center items-center gap-8 text-sm text-gray-600 dark:text-gray-400 p-6 bg-white dark:bg-zinc-900 border-t border-gray-200 dark:border-zinc-700">
             <div>www.tenton.co</div>
             <div>hello@tenton.co</div>
         </footer>
@@ -88,13 +88,6 @@
         @livewireScripts
         @fluxScripts
 
-        <script>
-            setTimeout(function() {
-                localStorage.setItem('theme', 'light');
-                document.documentElement.classList.remove('dark');
-
-            }, 20);
-        </script>   
     </body>
 
 </html>
