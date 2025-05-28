@@ -107,16 +107,7 @@ new class extends Component {
                     {{ __('Saved.') }}
                 </x-action-message>
             </div>
-        </form>
-
-            <script>
-                // alert("Test");
-        setTimeout(function() {
-            localStorage.setItem('theme', 'light');
-            document.documentElement.classList.remove('dark');
-
-        }, 60);
-    </script>   
+        </form> 
 
         <livewire:settings.delete-user-form />
     </x-settings.layout>
