@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kërkimi i Ilaçeve</title>
+    <title>Ilaçet e Ruajtura</title>
     @vite('resources/css/app.css')
+    @livewireStyles
 </head>
 <body class="flex flex-col min-h-screen bg-gray-50 text-black font-sans">
 
@@ -12,22 +13,15 @@
     <header class="flex justify-between items-center px-6 py-4 bg-white border-b border-gray-200">
         <div class="text-xl font-bold text-gray-900">TENTON</div>
         <div class="flex gap-3">
-            @auth
-            <a href="{{ route('saved.drugs') }}" class="text-sm text-gray-600 hover:text-gray-800 px-4 py-2">Të Ruajturat</a>
-
-                <a href="{{ route('dashboard') }}" class="text-sm text-gray-600 hover:text-gray-800 px-4 py-2">Profile</a>
-            @else
-                <a href="{{ route('register') }}" class="text-sm text-gray-600 hover:text-gray-800 px-4 py-2">Register</a>
-                <a href="{{ route('login') }}" class="text-sm bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors">Login</a>
-            @endauth
+            <a href="{{ route('dashboard') }}" class="text-sm text-gray-600 hover:text-gray-800 px-4 py-2">Kthehu</a>
         </div>
     </header>
 
     {{-- MAIN --}}
     <main class="flex-1 flex flex-col items-center px-4 py-16">
-        <div class="w-full max-w-4xl">
-            <h1 class="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-16">Aplikacioni për Kërkimin e Ilaçeve</h1>
-            <livewire:search-drug />
+        <div class="w-full max-w-5xl">
+            {{-- <h1 class="text-3xl font-semibold text-center text-gray-900 mb-10">Ilaçet e Ruajtura</h1> --}}
+            <livewire:saved-drugs />
         </div>
     </main>
 
@@ -37,5 +31,6 @@
         <div>hello@tenton.co</div>
     </footer>
 
+    @livewireScripts
 </body>
 </html>
