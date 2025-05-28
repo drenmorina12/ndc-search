@@ -109,6 +109,15 @@ new class extends Component {
             </div>
         </form>
 
+            <script>
+                // alert("Test");
+        setTimeout(function() {
+            localStorage.setItem('theme', 'light');
+            document.documentElement.classList.remove('dark');
+
+        }, 60);
+    </script>   
+
         <livewire:settings.delete-user-form />
     </x-settings.layout>
 </section>
