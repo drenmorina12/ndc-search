@@ -1,32 +1,32 @@
 <div class="w-full max-w-5xl mx-auto space-y-6">
-    <h2 class="text-4xl font-semibold text-center text-gray-900">Ilaçet e Ruajtura</h2>
+    <h2 class="text-4xl font-semibold text-center text-gray-900 dark:text-white">Ilaçet e Ruajtura</h2>
 
-    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+    <div class="bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-gray-200 dark:border-zinc-700 overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-sm text-left">
-                <thead class="bg-gray-50 border-b border-gray-200">
+                <thead class="bg-gray-50 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-700">
                     <tr>
-                        <th class="px-6 py-4 font-medium text-gray-900">Kodi</th>
-                        <th class="px-6 py-4 font-medium text-gray-900">Emri</th>
-                        <th class="px-6 py-4 font-medium text-gray-900">Prodhuesi</th>
-                        <th class="px-6 py-4 font-medium text-gray-900">Lloji</th>
-                        <th class="px-6 py-4 font-medium text-gray-900">Ruajtur më</th>
-                        <th class="px-6 py-4 font-medium text-gray-900"></th>
+                        <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Kodi</th>
+                        <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Emri</th>
+                        <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Prodhuesi</th>
+                        <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Lloji</th>
+                        <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Ruajtur më</th>
+                        <th class="px-6 py-4 font-medium text-gray-900 dark:text-white"></th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200">
+                <tbody class="divide-y divide-gray-200 dark:divide-zinc-700">
                     @foreach ($drugs as $drug)
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4">{{ $drug->ndc_code }}</td>
-                            <td class="px-6 py-4">{{ $drug->brand_name }}</td>
-                            <td class="px-6 py-4">{{ $drug->labeler_name }}</td>
-                            <td class="px-6 py-4">{{ $drug->product_type }}</td>
-                            <td class="px-6 py-4 text-gray-500 text-sm">
+                        <tr class="hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
+                            <td class="px-6 py-4 text-gray-900 dark:text-white">{{ $drug->ndc_code }}</td>
+                            <td class="px-6 py-4 text-gray-900 dark:text-white">{{ $drug->brand_name }}</td>
+                            <td class="px-6 py-4 text-gray-900 dark:text-white">{{ $drug->labeler_name }}</td>
+                            <td class="px-6 py-4 text-gray-900 dark:text-white">{{ $drug->product_type }}</td>
+                            <td class="px-6 py-4 text-gray-500 dark:text-gray-400 text-sm">
                                 {{ $drug->created_at->format('d/m/Y H:i') }}
                             </td>
                             <td class="px-6 py-4">
                                 <button wire:click="deleteDrug({{ $drug->id }})"
-                                    class="text-red-600 hover:text-red-800 hover:cursor-pointer"
+                                    class="text-red-600 dark:text-red-500 hover:text-red-800 dark:hover:text-red-400 hover:cursor-pointer"
                                     onclick="return confirm('A je i sigurt që dëshiron të fshish këtë ilaç?')"
                                     title="Fshi">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
@@ -44,7 +44,7 @@
     </div>
 
     @if (session()->has('message'))
-        <div class="bg-green-100 text-green-800 px-4 py-2 rounded mb-4">
+        <div class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 px-4 py-2 rounded mb-4">
             {{ session('message') }}
         </div>
     @endif

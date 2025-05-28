@@ -9,7 +9,7 @@
 
             <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
                 {{-- <x-app-logo /> --}}
-                   <div class="text-xl font-bold text-gray-900">TENTON</div>
+                   <div class="text-xl font-bold text-gray-900 dark:text-white">TENTON</div>
             </a>
 
             <flux:navlist variant="outline">
