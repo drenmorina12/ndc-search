@@ -10,6 +10,17 @@ class SavedDrugs extends Component
 {
     use WithPagination;
 
+    public function deleteDrug($id)
+    {
+        $drug = \App\Models\Drug::find($id);
+
+        if ($drug) {
+            $drug->delete();
+            session()->flash('message', 'Ilaçi u fshi me sukses.');
+        }
+    }
+
+
     public function render()
     {
         return view('livewire.saved-drugs', [
