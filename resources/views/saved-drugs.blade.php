@@ -24,7 +24,7 @@
         <header class="flex justify-between items-center px-6 py-4 bg-white dark:bg-zinc-900 border-b border-gray-200 dark:border-zinc-700">
             <div class="text-xl font-bold text-gray-900 dark:text-white">TENTON</div>
             <div class="flex gap-3">
-                <a href="{{ route('dashboard') }}" class="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white px-4 py-2">Kthehu</a>
+                <a href="{{ route('home') }}" class="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white px-4 py-2">Kthehu</a>
                 {{-- PROFILE DROPDOWN --}}
                 <flux:dropdown position="bottom" align="start">
                     <flux:profile :name="auth() -> user() -> name" :initials="auth() -> user() -> initials()"
