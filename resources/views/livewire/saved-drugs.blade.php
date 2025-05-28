@@ -1,0 +1,35 @@
+<div class="w-full max-w-5xl mx-auto space-y-6">
+    <h2 class="text-4xl font-semibold text-center text-gray-900">Ilaçet e Ruajtura</h2>
+
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+                <thead class="bg-gray-50 border-b border-gray-200">
+                    <tr>
+                        <th class="px-6 py-4 font-medium text-gray-900">Kodi</th>
+                        <th class="px-6 py-4 font-medium text-gray-900">Emri</th>
+                        <th class="px-6 py-4 font-medium text-gray-900">Prodhuesi</th>
+                        <th class="px-6 py-4 font-medium text-gray-900">Lloji</th>
+                        <th class="px-6 py-4 font-medium text-gray-900">Ruajtur më</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    @foreach ($drugs as $drug)
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4">{{ $drug->ndc_code }}</td>
+                            <td class="px-6 py-4">{{ $drug->brand_name }}</td>
+                            <td class="px-6 py-4">{{ $drug->labeler_name }}</td>
+                            <td class="px-6 py-4">{{ $drug->product_type }}</td>
+                            <td class="px-6 py-4 text-gray-500 text-sm">{{ $drug->created_at->format('d/m/Y H:i') }}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="flex flex-col items-center gap-22 mt-16">
+        {{ $drugs->links() }}
+    </div>
+</div>

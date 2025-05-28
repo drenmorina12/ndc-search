@@ -19,4 +19,8 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
+Route::get('/saved-drugs', function () {
+    return view('saved-drugs');
+})->middleware(['auth'])->name('saved.drugs');
+
 require __DIR__.'/auth.php';
