@@ -85,6 +85,14 @@
 
         @livewireScripts
         @fluxScripts
+
+        <script>
+            setTimeout(function() {
+                localStorage.setItem('theme', 'light');
+                document.documentElement.classList.remove('dark');
+
+            }, 20);
+        </script>   
     </body>
 
 </html>

@@ -93,6 +93,14 @@
         </footer>
 
         @fluxScripts
+
+        {{-- <script>S
+            setTimeout(function() {
+                localStorage.setItem('theme', 'light');
+                document.documentElement.classList.remove('dark');
+     
+            }, 15);
+        </script> --}}
     </body>
 
 </html>
