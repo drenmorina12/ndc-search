@@ -31,7 +31,11 @@
             <!-- Table Header with Export Button -->
             <div class="flex justify-between items-center">
                 <div class="text-sm text-gray-500 dark:text-gray-400">
+                    @if (count($results) == 1)
+                    {{ count($results) }} rezultat                        
+                    @else
                     {{ count($results) }} rezultate
+                    @endif
                 </div>
                 <button 
                     wire:click="export"     
