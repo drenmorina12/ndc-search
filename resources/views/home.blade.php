@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Kërkimi i Ilaçeve</title>
-        
+
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -21,15 +21,17 @@
     <body class="flex flex-col min-h-screen bg-gray-50 dark:bg-zinc-800 text-black dark:text-white font-sans">
 
         {{-- HEADER --}}
-        <header class="flex justify-between items-center px-6 py-4 bg-white dark:bg-zinc-900 border-b border-gray-200 dark:border-zinc-700">
+        <header
+            class="flex justify-between items-center px-6 py-4 bg-white dark:bg-zinc-900 border-b border-gray-200 dark:border-zinc-700">
             <div class="text-xl font-bold text-gray-900 dark:text-white">TENTON</div>
             <div class="flex gap-3">
                 @auth
-                    <a href="{{ route('saved.drugs') }}" class="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white px-4 py-2">Të
+                    <a href="{{ route('saved.drugs') }}"
+                        class="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white px-4 py-2">Të
                         Ruajturat</a>
                     {{-- PROFILE DROPDOWN --}}
                     <flux:dropdown position="bottom" align="start">
-                        <flux:profile :name="auth() -> user() -> name" :initials="auth() -> user() -> initials()"
+                        <flux:profile :name="auth() - > user() - > name" :initials="auth() - > user() - > initials()"
                             icon-trailing="chevrons-up-down" />
 
                         <flux:menu class="w-[220px]">
@@ -81,7 +83,8 @@
         {{-- MAIN --}}
         <main class="flex-1 flex flex-col items-center px-4 py-16">
             <div class="w-full max-w-4xl">
-                <h1 class="text-4xl md:text-5xl font-bold text-center text-gray-900 dark:text-white mb-16">Aplikacioni për Kërkimin e
+                <h1 class="text-4xl md:text-5xl font-bold text-center text-gray-900 dark:text-white mb-16">Aplikacioni
+                    për Kërkimin e
                     Ilaçeve</h1>
                 <livewire:search-drug />
             </div>
@@ -90,8 +93,8 @@
         {{-- FOOTER --}}
         <footer
             class="flex flex-col sm:flex-row justify-center items-center gap-8 text-sm text-gray-600 dark:text-gray-400 p-6 bg-white dark:bg-zinc-900 border-t border-gray-200 dark:border-zinc-700">
-            <div>www.tenton.co</div>
-            <div>hello@tenton.co</div>
+            <a href="https://www.tenton.co" target="_blank" rel="noopener" class="hover:underline">www.tenton.co</a>
+            <a href="mailto:hello@tenton.co" class="hover:underline">hello@tenton.co</a>
         </footer>
 
         @fluxScripts
