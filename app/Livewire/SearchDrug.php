@@ -20,6 +20,11 @@ class SearchDrug extends Component
 
         $ndcCodes = $this->parseNdcInput($this->ndcInput);
 
+        if (empty($ndcCodes)) {
+            session()->flash('message', 'Ju lutem shkruani kode NDC të vlefshme (numra dhe vizë).');
+            return;
+        }
+
         $this->results = [];
 
         $localResults = $this->searchLocal($ndcCodes);
@@ -33,15 +38,16 @@ class SearchDrug extends Component
         }
     }
 
-    protected function parseNdcInput(string $input): array
-    {
-        return collect(explode(',', $input))
-            ->map(fn($code) => trim($code))
-            ->filter()
-            ->unique()
-            ->values()
-            ->all();
-    }
+protected function parseNdcInput(string $input): array
+{
+    return collect(explode(',', $input))
+        ->map(fn($code) => trim($code))
+        ->filter(fn($code) => preg_match('/^[\d\-]+$/', $code))
+        ->unique()
+        ->take(10)
+        ->values()
+        ->all();
+}
 
     protected function searchLocal(array $ndcCodes): array
     {
@@ -100,12 +106,50 @@ class SearchDrug extends Component
 
         foreach ($notFound as $code) {
             $final[] = [
-                'source' => $response->successful() ? 'Not Found' : 'API Error',
+                // 'source' => $response->successful() ? 'Not Found' : 'API Error',
+                'source' => 'Not Found',
+
                 'ndc_code' => $code,
             ];
         }
 
         return $final;
+    }
+
+    public function export()
+    {
+        if (empty($this->results)) {
+            return;
+        }
+
+        $filename = 'searched_results_' . now()->format('Y-m-d_H-i-s') . '.csv';
+
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => "attachment; filename=\"$filename\"",
+        ];
+
+        $callback = function () {
+            $file = fopen('php://output', 'w');
+
+            fputcsv($file, ['NDC Code', 'Brand Name', 'Labeler Name', 'Product Type', 'Source']);
+
+            foreach ($this->results as $result) {
+                $drug = $result['drug'] ?? null;
+
+                fputcsv($file, [
+                    $drug['ndc_code'] ?? $result['ndc_code'],
+                    $drug['brand_name'] ?? '-',
+                    $drug['labeler_name'] ?? '-',
+                    $drug['product_type'] ?? '-',
+                    $result['source'] ?? '-',
+                ]);
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 
     public function render()

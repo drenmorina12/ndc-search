@@ -22,9 +22,11 @@
 
         {{-- HEADER --}}
         <header class="flex justify-between items-center px-6 py-4 bg-white dark:bg-zinc-900 border-b border-gray-200 dark:border-zinc-700">
-            <div class="text-xl font-bold text-gray-900 dark:text-white">TENTON</div>
+            <a href="{{ route('home') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
+                <div class="text-xl font-bold text-gray-900 dark:text-white">TENTON</div>
+            </a>
             <div class="flex gap-3">
-                <a href="{{ route('home') }}" class="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white px-4 py-2">Kthehu</a>
+                <a href="{{ route('home') }}" class="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white px-4 py-2">Home</a>
                 {{-- PROFILE DROPDOWN --}}
                 <flux:dropdown position="bottom" align="start">
                     <flux:profile :name="auth() -> user() -> name" :initials="auth() -> user() -> initials()"
@@ -79,11 +81,7 @@
         </main>
 
         {{-- FOOTER --}}
-        <footer
-            class="flex flex-col sm:flex-row justify-center items-center gap-8 text-sm text-gray-600 dark:text-gray-400 p-6 bg-white dark:bg-zinc-900 border-t border-gray-200 dark:border-zinc-700">
-            <div>www.tenton.co</div>
-            <div>hello@tenton.co</div>
-        </footer>
+        <x-footer />
 
         @livewireScripts
         @fluxScripts

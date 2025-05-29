@@ -1,7 +1,24 @@
 <div class="w-full max-w-5xl mx-auto space-y-6">
     <h2 class="text-4xl font-semibold text-center text-gray-900 dark:text-white">Ilaçet e Ruajtura</h2>
 
-    <div class="bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-gray-200 dark:border-zinc-700 overflow-hidden">
+    @if ($drugs->count())
+        <!-- Export Button -->
+        <div class="flex justify-end">
+            <button wire:click="export"
+                class="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Eksporto CSV
+            </button>
+        </div>
+    @endif
+
+    <!-- Table -->
+    <div
+        class="bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-gray-200 dark:border-zinc-700 overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-sm text-left">
                 <thead class="bg-gray-50 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-700">
@@ -18,16 +35,19 @@
                     @foreach ($drugs as $drug)
                         <tr class="hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
                             <td class="px-6 py-4 text-gray-900 dark:text-white">{{ $drug->ndc_code }}</td>
-                            <td class="px-6 py-4 text-gray-900 dark:text-white">{{ $drug->brand_name }}</td>
-                            <td class="px-6 py-4 text-gray-900 dark:text-white">{{ $drug->labeler_name }}</td>
-                            <td class="px-6 py-4 text-gray-900 dark:text-white">{{ $drug->product_type }}</td>
+                            <td class="px-6 py-4 text-gray-700 dark:text-gray-300">{{ $drug->brand_name }}</td>
+                            <td class="px-6 py-4 text-gray-700 dark:text-gray-300">{{ $drug->labeler_name }}</td>
+                            <td class="px-6 py-4 text-gray-700 dark:text-gray-300">{{ $drug->product_type }}</td>
                             <td class="px-6 py-4 text-gray-500 dark:text-gray-400 text-sm">
-                                {{ $drug->created_at->format('d/m/Y H:i') }}
-                            </td>
+                                {{ $drug->created_at->format('d/m/Y H:i') }}</td>
                             <td class="px-6 py-4">
-                                <button wire:click="deleteDrug({{ $drug->id }})"
+                                <button x-data
+                                    @click.prevent="
+        if (confirm('A je i sigurt që dëshiron të fshish këtë ilaç?')) {
+            $wire.deleteDrug({{ $drug->id }})
+        }
+    "
                                     class="text-red-600 dark:text-red-500 hover:text-red-800 dark:hover:text-red-400 hover:cursor-pointer"
-                                    onclick="return confirm('A je i sigurt që dëshiron të fshish këtë ilaç?')"
                                     title="Fshi">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
