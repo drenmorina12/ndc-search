@@ -20,6 +20,11 @@ class SearchDrug extends Component
 
         $ndcCodes = $this->parseNdcInput($this->ndcInput);
 
+        if (empty($ndcCodes)) {
+            session()->flash('message', 'Ju lutem shkruani kode NDC të vlefshme (numra dhe vizë).');
+            return;
+        }
+
         $this->results = [];
 
         $localResults = $this->searchLocal($ndcCodes);
@@ -33,15 +38,16 @@ class SearchDrug extends Component
         }
     }
 
-    protected function parseNdcInput(string $input): array
-    {
-        return collect(explode(',', $input))
-            ->map(fn($code) => trim($code))
-            ->filter()
-            ->unique()
-            ->values()
-            ->all();
-    }
+protected function parseNdcInput(string $input): array
+{
+    return collect(explode(',', $input))
+        ->map(fn($code) => trim($code))
+        ->filter(fn($code) => preg_match('/^[\d\-]+$/', $code))
+        ->unique()
+        ->take(10)
+        ->values()
+        ->all();
+}
 
     protected function searchLocal(array $ndcCodes): array
     {
