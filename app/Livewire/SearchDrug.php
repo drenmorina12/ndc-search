@@ -108,6 +108,42 @@ class SearchDrug extends Component
         return $final;
     }
 
+    public function export()
+    {
+        if (empty($this->results)) {
+            return;
+        }
+
+        $filename = 'searched_results_' . now()->format('Y-m-d_H-i-s') . '.csv';
+
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => "attachment; filename=\"$filename\"",
+        ];
+
+        $callback = function () {
+            $file = fopen('php://output', 'w');
+
+            fputcsv($file, ['NDC Code', 'Brand Name', 'Labeler Name', 'Product Type', 'Source']);
+
+            foreach ($this->results as $result) {
+                $drug = $result['drug'] ?? null;
+
+                fputcsv($file, [
+                    $drug['ndc_code'] ?? $result['ndc_code'],
+                    $drug['brand_name'] ?? '-',
+                    $drug['labeler_name'] ?? '-',
+                    $drug['product_type'] ?? '-',
+                    $result['source'] ?? '-',
+                ]);
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
     public function render()
     {
         return view('livewire.search-drug');
