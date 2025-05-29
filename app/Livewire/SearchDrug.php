@@ -106,7 +106,9 @@ protected function parseNdcInput(string $input): array
 
         foreach ($notFound as $code) {
             $final[] = [
-                'source' => $response->successful() ? 'Not Found' : 'API Error',
+                // 'source' => $response->successful() ? 'Not Found' : 'API Error',
+                'source' => 'Not Found',
+
                 'ndc_code' => $code,
             ];
         }
