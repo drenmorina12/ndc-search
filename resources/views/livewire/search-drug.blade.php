@@ -25,32 +25,55 @@
         Duke kërkuar...
     </div>
 
-    <!-- Results Table -->
+    <!-- Results Table with Export Button -->
     @if (!empty($results))
-        <div class="bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-gray-200 dark:border-zinc-700 overflow-hidden">
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm text-left">
-                    <thead class="bg-gray-50 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-700">
-                        <tr>
-                            <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Kodi</th>
-                            <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Emri i produktit</th>
-                            <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Prodhuesi</th>
-                            <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Lloji i produktit</th>
-                            <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Burimi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200 dark:divide-zinc-700">
-                        @foreach ($results as $result)
-                            <tr class="hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
-                                <td class="px-6 py-4 text-gray-900 dark:text-white font-medium">{{ $result['drug']['ndc_code'] ?? $result['ndc_code'] }}</td>
-                                <td class="px-6 py-4 text-gray-700 dark:text-gray-300">{{ $result['drug']['brand_name'] ?? '-' }}</td>
-                                <td class="px-6 py-4 text-gray-700 dark:text-gray-300">{{ $result['drug']['labeler_name'] ?? '-' }}</td>
-                                <td class="px-6 py-4 text-gray-700 dark:text-gray-300">{{ $result['drug']['product_type'] ?? '-' }}</td>
-                                <td class="px-6 py-4 text-gray-700 dark:text-gray-300">{{ $result['source'] }}</td>
+        <div class="space-y-3">
+            <!-- Table Header with Export Button -->
+            <div class="flex justify-between items-center">
+                <div class="text-sm text-gray-500 dark:text-gray-400">
+                    @if (count($results) == 1)
+                    {{ count($results) }} rezultat                        
+                    @else
+                    {{ count($results) }} rezultate
+                    @endif
+                </div>
+                <button 
+                    wire:click="export"     
+                    class="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Eksporto CSV
+                </button>
+            </div>
+
+            <!-- Results Table -->
+            <div class="bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-gray-200 dark:border-zinc-700 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-700">
+                            <tr>
+                                <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Kodi</th>
+                                <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Emri i produktit</th>
+                                <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Prodhuesi</th>
+                                <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Lloji i produktit</th>
+                                <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Burimi</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 dark:divide-zinc-700">
+                            @foreach ($results as $result)
+                                <tr class="hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
+                                    <td class="px-6 py-4 text-gray-900 dark:text-white font-medium">{{ $result['drug']['ndc_code'] ?? $result['ndc_code'] }}</td>
+                                    <td class="px-6 py-4 text-gray-700 dark:text-gray-300">{{ $result['drug']['brand_name'] ?? '-' }}</td>
+                                    <td class="px-6 py-4 text-gray-700 dark:text-gray-300">{{ $result['drug']['labeler_name'] ?? '-' }}</td>
+                                    <td class="px-6 py-4 text-gray-700 dark:text-gray-300">{{ $result['drug']['product_type'] ?? '-' }}</td>
+                                    <td class="px-6 py-4 text-gray-700 dark:text-gray-300">{{ $result['source'] }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     @endif
