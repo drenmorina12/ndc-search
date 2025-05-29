@@ -31,7 +31,7 @@
                         Ruajturat</a>
                     {{-- PROFILE DROPDOWN --}}
                     <flux:dropdown position="bottom" align="start">
-                        <flux:profile :name="auth() - > user() - > name" :initials="auth() - > user() - > initials()"
+                        <flux:profile :name="auth() -> user() -> name" :initials="auth() -> user() -> initials()"
                             icon-trailing="chevrons-up-down" />
 
                         <flux:menu class="w-[220px]">
