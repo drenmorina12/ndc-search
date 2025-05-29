@@ -29,8 +29,7 @@
             <div class="flex gap-3">
                 @auth
                     <a href="{{ route('saved.drugs') }}"
-                        class="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white px-4 py-2">Të
-                        Ruajturat</a>
+                        class="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white px-4 py-2">Saved Drugs</a>
                     {{-- PROFILE DROPDOWN --}}
                     <flux:dropdown position="bottom" align="start">
                         <flux:profile :name="auth() -> user() -> name" :initials="auth() -> user() -> initials()"
