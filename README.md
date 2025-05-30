@@ -123,6 +123,18 @@ This export functionality is fully handled server-side and provides clean, ready
 
 ---
 
+## License
+
+This project is licensed under the MIT License. Feel free to use and modify it as you wish.
+
+
+## Contributing
+
+Contributions are always welcome!
+
+If you'd like to contribute, please fork the repository and use a feature branch.
+
+
 ## Contact
 
 If you have any questions or feedback, feel free to reach out:
