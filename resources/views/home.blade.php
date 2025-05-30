@@ -24,7 +24,7 @@
         <header
             class="flex justify-between items-center px-6 py-4 bg-white dark:bg-zinc-900 border-b border-gray-200 dark:border-zinc-700">
             <a href="{{ route('home') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
-                <div class="text-xl font-bold text-gray-900 dark:text-white">TENTON</div>
+                <div class="text-xl font-bold text-gray-900 dark:text-white">SORIX</div>
             </a>
             <div class="flex gap-3">
                 @auth
