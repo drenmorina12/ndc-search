@@ -60,8 +60,8 @@ This project showcases integration with external APIs (OpenFDA), as well as full
 1. **Clone the repository**
 
    ```bash
-   git clone <your-repo-url>
-   cd <project-folder>
+   git clone https://github.com/drenmorina12/ndc-search.git
+   cd ndc-search
    ```
 
 2. **Install PHP dependencies**
